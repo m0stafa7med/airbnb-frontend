@@ -2,9 +2,7 @@ import {Component, inject, OnInit} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
 import {Button} from "primeng/button";
 import {FaIconLibrary, FontAwesomeModule} from "@fortawesome/angular-fontawesome";
-import {MessageService} from "primeng/api";
 import {fontAwesomeIcons} from "../shared/font-awesome-icons";
-import {ToastService} from "./layout/toast.service";
 
 @Component({
   selector: 'app-root',
