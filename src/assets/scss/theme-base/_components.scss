@@ -1,0 +1,109 @@
+@import '_mixins';
+@import '_colors';
+
+@import 'editor';
+
+@layer primeng {
+    @import '_common';
+
+    //Input
+    @import 'autocomplete';
+    @import 'calendar';
+    @import 'cascadeselect';
+    @import 'checkbox';
+    @import 'chips';
+    @import 'colorpicker';
+    @import 'dropdown';
+    @import 'iconfield';
+    @import 'inputgroup';
+    @import 'inputicon';
+    @import 'inputmask';
+    @import 'inputnumber';
+    @import 'inputotp';
+    @import 'inputswitch';
+    @import 'inputtext';
+    @import 'listbox';
+    @import 'multiselect';
+    @import 'password';
+    @import 'radiobutton';
+    @import 'rating';
+    @import 'selectbutton';
+    @import 'slider';
+    @import 'togglebutton';
+    @import 'treeselect';
+
+    //Button
+    @import 'button';
+    @import 'speeddial';
+    @import 'splitbutton';
+
+    //Data
+    @import 'carousel';
+    @import 'datatable';
+    @import 'dataview';
+    @import 'filter';
+    @import 'orderlist';
+    @import 'organizationchart';
+    @import 'paginator';
+    @import 'picklist';
+    @import 'timeline';
+    @import 'tree';
+    @import 'treetable';
+    @import 'virtualscroller';
+
+    //Panel
+    @import 'accordion';
+    @import 'card';
+    @import 'divider';
+    @import 'fieldset';
+    @import 'panel';
+    @import 'scrollpanel';
+    @import 'splitter';
+    @import 'tabview';
+    @import 'toolbar';
+
+    //Overlay
+    @import 'confirmpopup';
+    @import 'dialog';
+    @import 'overlaypanel';
+    @import 'sidebar';
+    @import 'tooltip';
+
+    //File
+    @import 'fileupload';
+
+    //Menu
+    @import 'breadcrumb';
+    @import 'contextmenu';
+    @import 'dock';
+    @import 'megamenu';
+    @import 'menu';
+    @import 'menubar';
+    @import 'panelmenu';
+    @import 'slidemenu';
+    @import 'steps';
+    @import 'tabmenu';
+    @import 'tieredmenu';
+
+    //Messages
+    @import 'inlinemessage';
+    @import 'message';
+    @import 'components/messages/toast';
+
+    //MultiMedia
+    @import 'galleria';
+    @import 'image';
+
+    //Misc
+    @import 'avatar';
+    @import 'badge';
+    @import 'blockui';
+    @import 'chip';
+    @import 'inplace';
+    @import 'metergroup';
+    @import 'progressbar';
+    @import 'scrolltop';
+    @import 'skeleton';
+    @import 'tag';
+    @import 'terminal';
+}
