@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Category, CategoryName} from "./category.model";
 import {BehaviorSubject} from "rxjs";
 
