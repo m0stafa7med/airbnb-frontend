@@ -13,6 +13,7 @@ import {MessageService} from "primeng/api";
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, Button, FontAwesomeModule, ToastModule, NavbarComponent, FooterComponent],
+  providers:[MessageService],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -21,7 +22,7 @@ export class AppComponent implements OnInit {
   faIconLibrary = inject(FaIconLibrary);
   isListingView = true;
   toastService = inject(ToastService);
-  //messageService = inject(MessageService);
+  messageService = inject(MessageService);
 
   ngOnInit(): void {
     this.initFontAwesome();
@@ -36,7 +37,7 @@ export class AppComponent implements OnInit {
     this.toastService.sendSub.subscribe({
       next: newMessage => {
         if (newMessage && newMessage.summary !== this.toastService.INIT_STATE) {
-          //this.messageService.add(newMessage);
+          this.messageService.add(newMessage);
         }
       }
     })

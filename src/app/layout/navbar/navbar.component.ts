@@ -56,6 +56,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchMenu();
+    this.toastService.send({severity:"info" , summary:"Welcome to your Airbnb app"})
     /*this.authService.fetch(false);
     this.extractInformationForSearch();*/
   }
