@@ -9,6 +9,8 @@ import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
 import {MenuItem} from "primeng/api";
 import {ActivatedRoute} from "@angular/router";
 import {ToastService} from "./toast.service";
+import {AuthService} from "../../../core/auth/auth.service";
+import {User} from "../../../core/model/user.model";
 
 @Component({
   selector: 'app-navbar',
@@ -32,37 +34,35 @@ export class NavbarComponent implements OnInit {
   dates = "Any week";
 
   toastService = inject(ToastService);
+  authService = inject(AuthService);
   dialogService = inject(DialogService);
   activatedRoute = inject(ActivatedRoute);
   ref: DynamicDialogRef | undefined;
 
-  // login = () => this.authService.login();
-  //
-  // logout = () => this.authService.logout();
-
+  login = () => this.authService.login();
+  logout = () => this.authService.logout();
   currentMenuItems: MenuItem[] | undefined = [];
-
-  //connectedUser: User = {email: this.authService.notConnected};
+  connectedUser: User = {email: this.authService.notConnected};
 
 
   constructor() {
-    /*effect(() => {
+    effect(() => {
       if (this.authService.fetchUser().status === "OK") {
         this.connectedUser = this.authService.fetchUser().value!;
         this.currentMenuItems = this.fetchMenu();
       }
-    });*/
+    });
   }
 
   ngOnInit(): void {
     this.fetchMenu();
-    this.toastService.send({severity:"info" , summary:"Welcome to your Airbnb app"})
-    /*this.authService.fetch(false);
-    this.extractInformationForSearch();*/
+    this.toastService.send({severity: "info", summary: "Welcome to your Airbnb app"})
+    this.authService.fetch(false);
+    //this.extractInformationForSearch();
   }
 
   private fetchMenu(): MenuItem[] {
-   /* if (this.authService.isAuthenticated()) {
+    if (this.authService.isAuthenticated()) {
       return [
         {
           label: "My properties",
@@ -83,26 +83,26 @@ export class NavbarComponent implements OnInit {
           command: this.logout
         },
       ]
-    } else {*/
+    } else {
       return [
         {
           label: "Sign up",
           styleClass: "font-bold",
-          //command: this.login
+          command: this.login
         },
         {
           label: "Log in",
-          //command: this.login
+          command: this.login
         }
       ]
-   // }
+    }
   }
 
-  /*hasToBeLandlord(): boolean {
+  hasToBeLandlord(): boolean {
     return this.authService.hasAnyAuthority("ROLE_LANDLORD");
   }
 
-  openNewListing(): void {
+  /*openNewListing(): void {
     this.ref = this.dialogService.open(PropertiesCreateComponent,
       {
         width: "60%",
@@ -124,9 +124,9 @@ export class NavbarComponent implements OnInit {
         modal: true,
         showHeader: true
       });
-  }
+  }*/
 
-  private extractInformationForSearch(): void {
+  /*private extractInformationForSearch(): void {
     this.activatedRoute.queryParams.subscribe({
       next: params => {
         if (params["location"]) {
