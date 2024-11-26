@@ -102,29 +102,29 @@ export class NavbarComponent implements OnInit {
     return this.authService.hasAnyAuthority("ROLE_LANDLORD");
   }
 
-  /*openNewListing(): void {
-    this.ref = this.dialogService.open(PropertiesCreateComponent,
-      {
-        width: "60%",
-        header: "Airbnb your home",
-        closable: true,
-        focusOnShow: true,
-        modal: true,
-        showHeader: true
-      })
-  }
-
-  openNewSearch(): void {
-    this.ref = this.dialogService.open(SearchComponent,
-      {
-        width: "40%",
-        header: "Search",
-        closable: true,
-        focusOnShow: true,
-        modal: true,
-        showHeader: true
-      });
-  }*/
+  // openNewListing(): void {
+  //   this.ref = this.dialogService.open(PropertiesCreateComponent,
+  //     {
+  //       width: "60%",
+  //       header: "Airbnb your home",
+  //       closable: true,
+  //       focusOnShow: true,
+  //       modal: true,
+  //       showHeader: true
+  //     })
+  // }
+  //
+  // openNewSearch(): void {
+  //   this.ref = this.dialogService.open(SearchComponent,
+  //     {
+  //       width: "40%",
+  //       header: "Search",
+  //       closable: true,
+  //       focusOnShow: true,
+  //       modal: true,
+  //       showHeader: true
+  //     });
+  // }
 
   /*private extractInformationForSearch(): void {
     this.activatedRoute.queryParams.subscribe({
