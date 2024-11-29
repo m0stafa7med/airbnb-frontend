@@ -11,6 +11,8 @@ import {ActivatedRoute} from "@angular/router";
 import {ToastService} from "./toast.service";
 import {AuthService} from "../../../core/auth/auth.service";
 import {User} from "../../../core/model/user.model";
+import {PropertiesCreateComponent} from "../../landlord/properties-create/properties-create.component";
+// import dayjs from "dayjs";
 
 @Component({
   selector: 'app-navbar',
@@ -102,17 +104,17 @@ export class NavbarComponent implements OnInit {
     return this.authService.hasAnyAuthority("ROLE_LANDLORD");
   }
 
-  // openNewListing(): void {
-  //   this.ref = this.dialogService.open(PropertiesCreateComponent,
-  //     {
-  //       width: "60%",
-  //       header: "Airbnb your home",
-  //       closable: true,
-  //       focusOnShow: true,
-  //       modal: true,
-  //       showHeader: true
-  //     })
-  // }
+  openNewListing(): void {
+    this.ref = this.dialogService.open(PropertiesCreateComponent,
+      {
+        width: "60%",
+        header: "Airbnb your home",
+        closable: true,
+        focusOnShow: true,
+        modal: true,
+        showHeader: true
+      })
+  }
   //
   // openNewSearch(): void {
   //   this.ref = this.dialogService.open(SearchComponent,
