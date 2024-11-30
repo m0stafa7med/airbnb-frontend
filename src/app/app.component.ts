@@ -2,7 +2,7 @@ import {Component, inject, OnInit} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
 import {Button} from "primeng/button";
 import {FaIconLibrary, FontAwesomeModule} from "@fortawesome/angular-fontawesome";
-import {fontAwesomeIcons} from "../shared/font-awesome-icons";
+import {fontAwesomeIcons} from "./shared/font-awesome-icons";
 import {ToastModule} from "primeng/toast";
 import {NavbarComponent} from "./layout/navbar/navbar.component";
 import {FooterComponent} from "./layout/footer/footer.component";

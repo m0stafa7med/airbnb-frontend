@@ -19,13 +19,17 @@ import {ToastService} from "../../layout/navbar/toast.service";
 import {AuthService} from "../../../core/auth/auth.service";
 import {Step} from "./step.model";
 import {State} from "../../../core/model/state.model";
-import {CategoryStepComponent} from "./category-step/category-step.component";
+import {CategoryStepComponent} from "./step/category-step/category-step.component";
+import {FooterStepComponent} from "../../shared/footer-step/footer-step.component";
+import {LocationStepComponent} from "./step/location-step/location-step.component";
 
 @Component({
   selector: 'app-properties-create',
   standalone: true,
   imports: [
     CategoryStepComponent,
+    FooterStepComponent,
+    LocationStepComponent,
     // CategoryStepComponent,
     // FooterStepComponent,
     // LocationStepComponent,
@@ -188,6 +192,7 @@ export class PropertiesCreateComponent implements OnDestroy {
   }
 
   onLocationChange(newLocation: string) {
+    console.log("new location" , newLocation);
     this.newListing.location = newLocation;
   }
 
