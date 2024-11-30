@@ -19,11 +19,13 @@ import {ToastService} from "../../layout/navbar/toast.service";
 import {AuthService} from "../../../core/auth/auth.service";
 import {Step} from "./step.model";
 import {State} from "../../../core/model/state.model";
+import {CategoryStepComponent} from "./category-step/category-step.component";
 
 @Component({
   selector: 'app-properties-create',
   standalone: true,
   imports: [
+    CategoryStepComponent,
     // CategoryStepComponent,
     // FooterStepComponent,
     // LocationStepComponent,
