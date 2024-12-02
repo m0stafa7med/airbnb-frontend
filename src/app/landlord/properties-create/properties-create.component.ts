@@ -22,6 +22,7 @@ import {State} from "../../../core/model/state.model";
 import {CategoryStepComponent} from "./step/category-step/category-step.component";
 import {FooterStepComponent} from "../../shared/footer-step/footer-step.component";
 import {LocationStepComponent} from "./step/location-step/location-step.component";
+import {InfoStepComponent} from "./step/info-step/info-step.component";
 
 @Component({
   selector: 'app-properties-create',
@@ -30,6 +31,7 @@ import {LocationStepComponent} from "./step/location-step/location-step.componen
     CategoryStepComponent,
     FooterStepComponent,
     LocationStepComponent,
+    InfoStepComponent,
     // CategoryStepComponent,
     // FooterStepComponent,
     // LocationStepComponent,
