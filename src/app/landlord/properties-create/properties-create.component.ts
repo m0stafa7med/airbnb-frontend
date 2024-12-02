@@ -23,6 +23,8 @@ import {CategoryStepComponent} from "./step/category-step/category-step.componen
 import {FooterStepComponent} from "../../shared/footer-step/footer-step.component";
 import {LocationStepComponent} from "./step/location-step/location-step.component";
 import {InfoStepComponent} from "./step/info-step/info-step.component";
+import {PictureStepComponent} from "./step/picture-step/picture-step.component";
+import {DescriptionStepComponent} from "./step/description-step/description-step.component";
 
 @Component({
   selector: 'app-properties-create',
@@ -32,6 +34,8 @@ import {InfoStepComponent} from "./step/info-step/info-step.component";
     FooterStepComponent,
     LocationStepComponent,
     InfoStepComponent,
+    PictureStepComponent,
+    DescriptionStepComponent,
     // CategoryStepComponent,
     // FooterStepComponent,
     // LocationStepComponent,
