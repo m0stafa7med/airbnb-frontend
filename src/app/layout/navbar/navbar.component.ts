@@ -12,7 +12,7 @@ import {ToastService} from "./toast.service";
 import {AuthService} from "../../../core/auth/auth.service";
 import {User} from "../../../core/model/user.model";
 import {PropertiesCreateComponent} from "../../landlord/properties-create/properties-create.component";
-// import dayjs from "dayjs";
+import dayjs from "dayjs";
 
 @Component({
   selector: 'app-navbar',
@@ -128,7 +128,7 @@ export class NavbarComponent implements OnInit {
   //     });
   // }
 
-  /*private extractInformationForSearch(): void {
+  private extractInformationForSearch(): void {
     this.activatedRoute.queryParams.subscribe({
       next: params => {
         if (params["location"]) {
@@ -143,5 +143,5 @@ export class NavbarComponent implements OnInit {
         }
       }
     })
-  }*/
+  }
 }

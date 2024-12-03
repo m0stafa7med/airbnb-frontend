@@ -20,8 +20,7 @@ import {BookedListing} from "../../tenant/booking.model";
 })
 export class CardListingComponent {
 
-  listing = input.required<CardListing>();
-  //listing = input.required<CardListing | BookedListing>();
+  listing = input.required<CardListing | BookedListing>();
   cardMode = input<"landlord" | "booking">();
 
   @Output()

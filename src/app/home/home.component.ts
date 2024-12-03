@@ -10,6 +10,7 @@ import {ToastService} from "../layout/navbar/toast.service";
 import {Pagination} from "../../core/model/request.model";
 import {TenantListingService} from "../tenant/tenant-listing.service";
 import {Search} from "../tenant/search/search.model";
+import dayjs from "dayjs";
 
 @Component({
   selector: 'app-home',
@@ -109,7 +110,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     })
   }
 
-/*  private startNewSearch(): void {
+  private startNewSearch(): void {
     this.activatedRoute.queryParams.pipe(
       filter(params => params['location']),
     ).subscribe({
@@ -133,7 +134,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.tenantListingService.searchListing(newSearch, this.pageRequest);
       }
     })
-  }*/
+  }
 
   onResetSearchFilter() {
     this.router.navigate(["/"], {
