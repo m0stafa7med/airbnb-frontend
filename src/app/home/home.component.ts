@@ -59,7 +59,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    //this.startNewSearch();
+    this.startNewSearch();
     this.listenToChangeCategory();
   }
 

@@ -59,7 +59,7 @@ export class CardListingComponent {
     effect(() => {
       const cardMode = this.cardMode();
       if (cardMode && cardMode === "booking") {
-       // this.bookingListing = this.listing() as BookedListing
+        this.bookingListing = this.listing() as BookedListing
       } else {
         this.cardListing = this.listing() as CardListing;
       }

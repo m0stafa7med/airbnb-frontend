@@ -7,12 +7,13 @@ import {CategoryComponent} from "./category/category.component";
 import {AvatarComponent} from "./avatar/avatar.component";
 import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
 import {MenuItem} from "primeng/api";
+import {PropertiesCreateComponent} from "../../landlord/properties-create/properties-create.component";
+import {SearchComponent} from "../../tenant/search/search.component";
 import {ActivatedRoute} from "@angular/router";
+import dayjs from "dayjs";
 import {ToastService} from "./toast.service";
 import {AuthService} from "../../../core/auth/auth.service";
 import {User} from "../../../core/model/user.model";
-import {PropertiesCreateComponent} from "../../landlord/properties-create/properties-create.component";
-import dayjs from "dayjs";
 
 @Component({
   selector: 'app-navbar',
@@ -42,8 +43,11 @@ export class NavbarComponent implements OnInit {
   ref: DynamicDialogRef | undefined;
 
   login = () => this.authService.login();
+
   logout = () => this.authService.logout();
+
   currentMenuItems: MenuItem[] | undefined = [];
+
   connectedUser: User = {email: this.authService.notConnected};
 
 
@@ -57,10 +61,8 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fetchMenu();
-    this.toastService.send({severity: "info", summary: "Welcome to your Airbnb app"})
     this.authService.fetch(false);
-    //this.extractInformationForSearch();
+    this.extractInformationForSearch();
   }
 
   private fetchMenu(): MenuItem[] {
@@ -115,18 +117,18 @@ export class NavbarComponent implements OnInit {
         showHeader: true
       })
   }
-  //
-  // openNewSearch(): void {
-  //   this.ref = this.dialogService.open(SearchComponent,
-  //     {
-  //       width: "40%",
-  //       header: "Search",
-  //       closable: true,
-  //       focusOnShow: true,
-  //       modal: true,
-  //       showHeader: true
-  //     });
-  // }
+
+  openNewSearch(): void {
+    this.ref = this.dialogService.open(SearchComponent,
+      {
+        width: "40%",
+        header: "Search",
+        closable: true,
+        focusOnShow: true,
+        modal: true,
+        showHeader: true
+      });
+  }
 
   private extractInformationForSearch(): void {
     this.activatedRoute.queryParams.subscribe({
