@@ -1,65 +1,78 @@
-import {computed, inject, Injectable, signal, WritableSignal} from '@angular/core';
+import {computed, effect, inject, Injectable, signal, WritableSignal} from '@angular/core';
 import {HttpClient, HttpParams, HttpStatusCode} from "@angular/common/http";
 import {User} from "../model/user.model";
 import {State} from "../model/state.model";
-import {Location} from "@angular/common";
 import {environment} from "../../environments/environment";
-import {Observable} from "rxjs";
+import {Observable, of, switchMap} from "rxjs";
+import {AuthService as Auth0Service} from "@auth0/auth0-angular";
+import {toSignal} from "@angular/core/rxjs-interop";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  http = inject(HttpClient);
-
-  location = inject(Location);
+  private http = inject(HttpClient);
+  private auth0 = inject(Auth0Service);
 
   notConnected = "NOT_CONNECTED";
+
+  private isAuthenticatedSignal = toSignal(this.auth0.isAuthenticated$, {initialValue: false});
 
   private fetchUser$: WritableSignal<State<User>> =
     signal(State.Builder<User>().forSuccess({email: this.notConnected}));
   fetchUser = computed(() => this.fetchUser$());
+
+  constructor() {
+    // Auto-fetch the connected user once Auth0 reports authenticated state.
+    effect(() => {
+      if (this.isAuthenticatedSignal()) {
+        this.fetch(false);
+      } else {
+        this.fetchUser$.set(State.Builder<User>().forSuccess({email: this.notConnected}));
+      }
+    });
+  }
 
   fetch(forceReSync: boolean): void {
     this.fetchHttpUser(forceReSync)
       .subscribe({
         next: user => this.fetchUser$.set(State.Builder<User>().forSuccess(user)),
         error: err => {
-          if (err.status === HttpStatusCode.Unauthorized && this.isAuthenticated()) {
+          if (err.status === HttpStatusCode.Unauthorized) {
             this.fetchUser$.set(State.Builder<User>().forSuccess({email: this.notConnected}));
           } else {
             this.fetchUser$.set(State.Builder<User>().forError(err));
           }
         }
-      })
+      });
   }
 
   login(): void {
-    location.href = `${location.origin}${this.location.prepareExternalUrl("oauth2/authorization/okta")}`;
+    this.auth0.loginWithRedirect();
   }
 
   logout(): void {
-    this.http.post(`${environment.API_URL}/auth/logout`, {})
-      .subscribe({
-        next: (response: any) => {
-          this.fetchUser$.set(State.Builder<User>()
-            .forSuccess({email: this.notConnected}));
-          location.href = response.logoutUrl
-        }
-      })
+    this.fetchUser$.set(State.Builder<User>().forSuccess({email: this.notConnected}));
+    this.auth0.logout({logoutParams: {returnTo: window.location.origin}});
   }
 
   isAuthenticated(): boolean {
     if (this.fetchUser$().value) {
       return this.fetchUser$().value!.email !== this.notConnected;
-    } else {
-      return false;
     }
+    return false;
   }
 
   fetchHttpUser(forceResync: boolean): Observable<User> {
-    const params = new HttpParams().set('forceResync', forceResync);
-    return this.http.get<User>(`${environment.API_URL}/auth/get-authenticated-user`, {params})
+    return this.auth0.isAuthenticated$.pipe(
+      switchMap(authenticated => {
+        if (!authenticated) {
+          return of({email: this.notConnected} as User);
+        }
+        const params = new HttpParams().set('forceResync', forceResync);
+        return this.http.get<User>(`${environment.API_URL}/auth/get-authenticated-user`, {params});
+      })
+    );
   }
 
   hasAnyAuthority(authorities: string[] | string): boolean {

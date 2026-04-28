@@ -7,7 +7,7 @@ export const authorityRouteAccess: CanActivateFn = (next: ActivatedRouteSnapshot
   const authService = inject(AuthService);
   return authService.fetchHttpUser(false).pipe(
     map(connectedUser => {
-      if (connectedUser) {
+      if (connectedUser && connectedUser.email !== authService.notConnected) {
         const authorities = next.data['authorities'];
         return !authorities || authorities.length === 0 || authService.hasAnyAuthority(authorities);
       }
@@ -15,4 +15,4 @@ export const authorityRouteAccess: CanActivateFn = (next: ActivatedRouteSnapshot
       return false;
     })
   );
-}
+};
