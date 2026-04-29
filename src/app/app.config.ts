@@ -19,7 +19,16 @@ export const appConfig: ApplicationConfig = {
         audience: environment.auth0.audience,
       },
       httpInterceptor: {
-        allowedList: [`${window.location.origin}/api/*`, `//localhost:4200/api/*`],
+        allowedList: [
+          {
+            uri: '/api/*',
+            tokenOptions: {
+              authorizationParams: {
+                audience: environment.auth0.audience,
+              },
+            },
+          },
+        ],
       },
     }),
     provideRouter(routes),
