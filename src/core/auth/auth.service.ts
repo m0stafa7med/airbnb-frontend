@@ -30,7 +30,7 @@ export class AuthService {
       } else {
         this.fetchUser$.set(State.Builder<User>().forSuccess({email: this.notConnected}));
       }
-    });
+    }, {allowSignalWrites: true});
   }
 
   fetch(forceReSync: boolean): void {
