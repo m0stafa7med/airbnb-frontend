@@ -27,6 +27,7 @@ export const appConfig: ApplicationConfig = {
         allowedList: [
           {
             uriMatcher: (uri) => uri.includes('/api/'),
+            allowAnonymous: true,
             tokenOptions: {
               authorizationParams: {
                 audience: environment.auth0.audience,

@@ -39,10 +39,13 @@ export class LocationMapComponent {
     formatLabel = (country: Country) => country.flag + "   " + country.name.common;
 
     myIcon = L.icon({
-        iconUrl: 'http://maps.google.com/mapfiles/ms/icons/blue.png',
-        iconSize: [40, 40],
-        iconAnchor: [22, 94],
-        popupAnchor: [-3, -76],
+        iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+        iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
+        shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],   // bottom-center of the pin tip
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41],
     });
 
     options = {
