@@ -3,7 +3,7 @@ import {HttpClient, HttpParams, HttpStatusCode} from "@angular/common/http";
 import {User} from "../model/user.model";
 import {State} from "../model/state.model";
 import {environment} from "../../environments/environment";
-import {Observable, of, switchMap} from "rxjs";
+import {combineLatest, filter, Observable, of, switchMap, take} from "rxjs";
 import {AuthService as Auth0Service} from "@auth0/auth0-angular";
 import {toSignal} from "@angular/core/rxjs-interop";
 
@@ -16,7 +16,16 @@ export class AuthService {
 
   notConnected = "NOT_CONNECTED";
 
-  private isAuthenticatedSignal = toSignal(this.auth0.isAuthenticated$, {initialValue: false});
+  // Only consider the auth state meaningful once the SDK has finished its
+  // initial session check; otherwise stale `is.authenticated` cookies cause
+  // a spurious `true` to flicker out and trigger a 401-bound API call.
+  private settledAuth$ = combineLatest([this.auth0.isLoading$, this.auth0.isAuthenticated$])
+    .pipe(
+      filter(([loading]) => !loading),
+      switchMap(([, authenticated]) => of(authenticated))
+    );
+
+  private isAuthenticatedSignal = toSignal(this.settledAuth$, {initialValue: false});
 
   private fetchUser$: WritableSignal<State<User>> =
     signal(State.Builder<User>().forSuccess({email: this.notConnected}));
@@ -64,7 +73,8 @@ export class AuthService {
   }
 
   fetchHttpUser(forceResync: boolean): Observable<User> {
-    return this.auth0.isAuthenticated$.pipe(
+    return this.settledAuth$.pipe(
+      take(1),
       switchMap(authenticated => {
         if (!authenticated) {
           return of({email: this.notConnected} as User);
